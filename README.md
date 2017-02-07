@@ -1,4 +1,4 @@
-# node-cpu-availibility
+# node-cpu-monitor
 Cpu availability of any server using nodejs 
 
 ## Usage
