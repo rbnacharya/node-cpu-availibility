@@ -2,17 +2,22 @@
 let e = require('./e');
 let config = require('./config');
 require('./monitor');
-module.exports.start = (cc) => {
-    if(!cc.name){
-        throw new Error('name cannot be empty')
+
+module.exports = (backend) => {
+    return {
+        start: (cc) => {
+             if(!cc.name){
+                throw new Error('name cannot be empty')
+            }
+            let port = config.port || process.env.PORT;
+            let c = config;
+            c.port = port;
+            c.name = cc.name;
+            c.backend = backend || c.backend;
+            e.emit('start', c);
+            return port;
+        }
     }
-    let port = config.port || process.env.PORT;
-    let c = config;
-    c.port = port;
-    c.name = cc.name;
-    c.backend = cc.backend || c.backend;
-    e.emit('start', c);
-    return port;
 }
 
 if (require.main === module) {
