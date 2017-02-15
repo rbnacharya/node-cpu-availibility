@@ -9,7 +9,7 @@ module.exports = (backend) => {
              if(!cc.name){
                 throw new Error('name cannot be empty')
             }
-            let port = config.port || process.env.PORT;
+            let port = cc.port || process.env.PORT;
             let c = config;
             c.port = port;
             c.name = cc.name;
